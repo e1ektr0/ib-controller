@@ -1,3 +1,6 @@
+**Different with official rep:**
+![Different with official rep]https://github.com/e1ektr0/ib-controller/blob/master/screen.png
+
 **Download the
 [latest official release](https://github.com/ib-controller/ib-controller/releases/latest)
 here**
