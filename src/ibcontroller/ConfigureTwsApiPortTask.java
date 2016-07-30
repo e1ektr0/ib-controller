@@ -49,11 +49,37 @@ class ConfigureTwsApiPortTask implements Runnable{
 
     private void configure(final JDialog configDialog, final int portNumber) {
         try {
-            Utils.logToConsole("Performing port configuration");
+            Utils.logToConsole("Performing port configuration1");
             
             if (!Utils.selectConfigSection(configDialog, new String[] {"API","Settings"}))
                 // older versions of TWS don't have the Settings node below the API node
                 Utils.selectConfigSection(configDialog, new String[] {"API"});
+            JCheckBox checkboxReadOnly = SwingUtils.findCheckBox(configDialog, "Read-Only API");
+            if(checkboxReadOnly == null)
+                Utils.logError("Read-OnlyNotFound");
+            else
+            {
+                checkboxReadOnly.setSelected(false);
+                Utils.logToConsole("Unselect and disable Read-Only API");
+            }
+
+            Component compApiAllow = SwingUtils.findComponent(configDialog, "Let API account requests switch user-visible account subscription");
+            if(compApiAllow == null)
+            {
+                Utils.logError("compApiAllow not found");
+            }
+            else
+            {
+                JCheckBox checkboxApiAccountAllow = SwingUtils.findCheckBox((Container)compApiAllow, "Let API account requests switch user-visible account subscription");
+                if(checkboxApiAccountAllow == null)
+                    Utils.logError("checkboxApiAccountAllow not found");
+                else
+                {
+                    checkboxApiAccountAllow.setSelected(true);
+                    Utils.logToConsole("Select Let API account");
+                }
+            }
+
 
             Component comp = SwingUtils.findComponent(configDialog, "Socket port");
             if (comp == null) throw new IBControllerException("could not find socket port component");
@@ -74,6 +100,8 @@ class ConfigureTwsApiPortTask implements Runnable{
                 tf.setText(Integer.toString(portNumber));
                 Utils.logToConsole("TWS API socket port now set to " + tf.getText());
             }
+
+
 
             SwingUtils.clickButton(configDialog, "OK");
 
