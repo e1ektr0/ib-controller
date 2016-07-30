@@ -1,4 +1,6 @@
 **Different with official rep:**
+* Unckecked "Read-Only API"
+* Checked "Let API account requests switch user-visible account subscription"
 ![Different with official rep](https://github.com/e1ektr0/ib-controller/blob/master/screen.png)
 
 **Download the
